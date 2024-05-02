@@ -1,5 +1,6 @@
 <script>
 import {reactive, toRefs} from "vue";
+import {register} from "@/api/user.js";
 import {ElMessage} from "element-plus";
 import {setUid, setUserName} from "@/until/auth.js";
 import router from "@/router/index.js";

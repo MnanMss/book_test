@@ -9,7 +9,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 用户相关模块
@@ -21,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "UserController", description = "用户相关模块")
 @RequestMapping(ApiRouterConsts.API_USER_URL_PREFIX)
 @Slf4j
-@CrossOrigin("http://localhost:5173")
+//@CrossOrigin("http://localhost:5173")
 @AllArgsConstructor
 public class UserController {
 

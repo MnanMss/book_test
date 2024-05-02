@@ -12,7 +12,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 图书相关模块
@@ -24,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(ApiRouterConsts.API_BOOK_URL_PREFIX)
 @Slf4j
-@CrossOrigin("http://localhost:5173")
+//@CrossOrigin("http://localhost:5173")
 @Tag(name = "BookController", description = "图书相关模块")
 @AllArgsConstructor
 public class BookController {
