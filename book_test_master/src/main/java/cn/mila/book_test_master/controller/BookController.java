@@ -4,8 +4,8 @@ import cn.mila.book_test_master.core.common.resp.PageRespDto;
 import cn.mila.book_test_master.core.common.resp.RestResp;
 import cn.mila.book_test_master.core.constant.ApiRouterConsts;
 import cn.mila.book_test_master.dao.entity.Book;
-import cn.mila.book_test_master.dto.req.BorrowBookDto;
-import cn.mila.book_test_master.dto.req.ReturnBookDto;
+import cn.mila.book_test_master.dto.req.BorrowBookReqDto;
+import cn.mila.book_test_master.dto.req.ReturnBookReqDto;
 import cn.mila.book_test_master.dto.req.SearchReqDto;
 import cn.mila.book_test_master.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -56,7 +56,7 @@ public class BookController {
      */
     @PostMapping("/borrow")
     @Operation(summary = "借书")
-    public RestResp<Void> borrowBook(@RequestBody BorrowBookDto borrowBookDto) {
+    public RestResp<Void> borrowBook(@RequestBody BorrowBookReqDto borrowBookDto) {
         log.info("借书，{}", borrowBookDto);
         bookService.borrowBook(borrowBookDto);
         return RestResp.ok();
@@ -70,7 +70,7 @@ public class BookController {
      */
     @PostMapping("/returnBook")
     @Operation(summary = "还书")
-    public RestResp<Void> returnBook(@RequestBody ReturnBookDto returnBookDto) {
+    public RestResp<Void> returnBook(@RequestBody ReturnBookReqDto returnBookDto) {
         log.info("还书，{}", returnBookDto);
         bookService.returnBook(returnBookDto);
         return RestResp.ok();

@@ -2,11 +2,11 @@ package cn.mila.book_test_master.service.impl;
 
 import cn.mila.book_test_master.core.common.constant.ErrorCodeEnum;
 import cn.mila.book_test_master.core.common.exception.BusinessException;
-import cn.mila.book_test_master.core.constant.DatabaseConstants;
+import cn.mila.book_test_master.core.constant.DatabaseConsts;
 import cn.mila.book_test_master.dao.entity.User;
 import cn.mila.book_test_master.dao.mapper.UserMapper;
 import cn.mila.book_test_master.dto.req.UserReqDto;
-import cn.mila.book_test_master.dto.resp.UserRespDto;
+import cn.mila.book_test_master.dto.resp.UserLoginRespDto;
 import cn.mila.book_test_master.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -51,9 +51,9 @@ public class UserServiceImpl implements UserService {
      * @return 用户返回 DTO
      */
     @Override
-    public UserRespDto login(UserReqDto userReqDto) {
+    public UserLoginRespDto login(UserReqDto userReqDto) {
         Map<String, Object> param = new HashMap<>();
-        param.put(DatabaseConstants.UserTable.COLUMN_USER_NAME, userReqDto.getUserName());
+        param.put(DatabaseConsts.UserTable.COLUMN_USER_NAME, userReqDto.getUserName());
         List<User> users = userMapper.selectByMap(param);
         // 账号不存在
         if (users == null || users.isEmpty()) {
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
             //密码错误
             throw new BusinessException(ErrorCodeEnum.PASSWORD_ERROR);
         }
-        return UserRespDto.builder()
+        return UserLoginRespDto.builder()
             .uid(users.get(0).getId())
             .userName(users.get(0).getUserName())
             .build();

@@ -6,12 +6,13 @@ import lombok.Data;
 
 /**
  * 用户响应 DTO
+ *
  * @author mila
  * @date 2024/4/26
  */
 @Data
 @Builder
-public class UserRespDto {
+public class UserLoginRespDto {
 
     @Schema(description = "用户ID")
     private Long uid;

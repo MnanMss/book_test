@@ -2,8 +2,8 @@ package cn.mila.book_test_master.service;
 
 import cn.mila.book_test_master.core.common.resp.PageRespDto;
 import cn.mila.book_test_master.dao.entity.Book;
-import cn.mila.book_test_master.dto.req.BorrowBookDto;
-import cn.mila.book_test_master.dto.req.ReturnBookDto;
+import cn.mila.book_test_master.dto.req.BorrowBookReqDto;
+import cn.mila.book_test_master.dto.req.ReturnBookReqDto;
 import cn.mila.book_test_master.dto.req.SearchReqDto;
 
 /**
@@ -14,7 +14,7 @@ public interface BookService {
 
     PageRespDto<Book> page(SearchReqDto reqDto);
 
-    void borrowBook(BorrowBookDto borrowBookDto);
+    void borrowBook(BorrowBookReqDto borrowBookDto);
 
-    void returnBook(ReturnBookDto borrowBookDto);
+    void returnBook(ReturnBookReqDto borrowBookDto);
 }

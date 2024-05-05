@@ -3,7 +3,7 @@ package cn.mila.book_test_master.controller;
 import cn.mila.book_test_master.core.common.resp.RestResp;
 import cn.mila.book_test_master.core.constant.ApiRouterConsts;
 import cn.mila.book_test_master.dto.req.UserReqDto;
-import cn.mila.book_test_master.dto.resp.UserRespDto;
+import cn.mila.book_test_master.dto.resp.UserLoginRespDto;
 import cn.mila.book_test_master.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -46,9 +46,9 @@ public class UserController {
      */
     @Operation(summary = "用户登录")
     @PostMapping("/login")
-    public RestResp<UserRespDto> login(@RequestBody UserReqDto userReqDto) {
+    public RestResp<UserLoginRespDto> login(@RequestBody UserReqDto userReqDto) {
         log.info("用户登录：{}", userReqDto);
-        UserRespDto userRespDto = userService.login(userReqDto);
+        UserLoginRespDto userRespDto = userService.login(userReqDto);
         return RestResp.ok(userRespDto);
     }
 }

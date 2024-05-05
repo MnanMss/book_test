@@ -6,7 +6,7 @@ package cn.mila.book_test_master.core.constant;
  * @author mila
  * @date 2024/4/26
  */
-public class DatabaseConstants {
+public class DatabaseConsts {
 
     /**
      * 用户表

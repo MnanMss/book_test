@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "book.cors.allow-origins",
+      "type": "java.util.List<java.lang.String>",
+      "description": "允许跨域的域名."
+    },
+    {
+      "name": "book.jwt.secret",
+      "type": "java.lang.String",
+      "description": "JWT 密钥."
+    }
+  ]
+}

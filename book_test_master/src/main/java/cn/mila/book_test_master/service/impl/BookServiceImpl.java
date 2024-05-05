@@ -7,8 +7,8 @@ import cn.mila.book_test_master.core.common.resp.PageRespDto;
 import cn.mila.book_test_master.dao.entity.Book;
 import cn.mila.book_test_master.dao.mapper.BookMapper;
 import cn.mila.book_test_master.dao.mapper.UserMapper;
-import cn.mila.book_test_master.dto.req.BorrowBookDto;
-import cn.mila.book_test_master.dto.req.ReturnBookDto;
+import cn.mila.book_test_master.dto.req.BorrowBookReqDto;
+import cn.mila.book_test_master.dto.req.ReturnBookReqDto;
 import cn.mila.book_test_master.dto.req.SearchReqDto;
 import cn.mila.book_test_master.service.BookService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -58,7 +58,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void borrowBook(BorrowBookDto borrowBookDto) {
+    public void borrowBook(BorrowBookReqDto borrowBookDto) {
         // update book set borrow_time = ?, borrow_status = ? ,borrower_name = ? , borrower_id = ?
         Book book = new Book();
         BeanUtils.copyProperties(borrowBookDto, book);
@@ -67,20 +67,21 @@ public class BookServiceImpl implements BookService {
             throw new BusinessException(ErrorCodeEnum.BOOK_BORROW_ERROR);
         }
         book.setBorrowStatus(CommonConsts.BORROWED);
-        LambdaUpdateWrapper<Book> wrapper = new LambdaUpdateWrapper<Book>();
+        LambdaUpdateWrapper<Book> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(Book::getId, borrowBookDto.getId());
         bookMapper.update(book, wrapper);
     }
 
     @Override
-    public void returnBook(ReturnBookDto returnBookDto) {
+    public void returnBook(ReturnBookReqDto returnBookDto) {
         Book book = bookMapper.selectById(returnBookDto.getId());
+        // 防止别人还书
         if (!book.getBorrowerName().equals(returnBookDto.getBorrowerName())) {
             throw new BusinessException(ErrorCodeEnum.BOOK_RETURN_ERROR);
         }
         book.setReturnTime(LocalDateTime.now());
         book.setBorrowStatus(CommonConsts.UN_BORROWED);
-        LambdaUpdateWrapper<Book> wrapper = new LambdaUpdateWrapper<Book>();
+        LambdaUpdateWrapper<Book> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(Book::getId, returnBookDto.getId());
         bookMapper.update(book, wrapper);
     }

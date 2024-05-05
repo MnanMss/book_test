@@ -1,7 +1,7 @@
 package cn.mila.book_test_master.service;
 
 import cn.mila.book_test_master.dto.req.UserReqDto;
-import cn.mila.book_test_master.dto.resp.UserRespDto;
+import cn.mila.book_test_master.dto.resp.UserLoginRespDto;
 
 /**
  * @author mila
@@ -11,5 +11,5 @@ public interface UserService {
 
     void register(UserReqDto userReqDto);
 
-    UserRespDto login(UserReqDto userReqDto);
+    UserLoginRespDto login(UserReqDto userReqDto);
 }
