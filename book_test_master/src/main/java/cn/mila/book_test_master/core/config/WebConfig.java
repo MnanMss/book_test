@@ -6,7 +6,9 @@ import cn.mila.book_test_master.core.json.JacksonObjectDateMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -48,6 +50,12 @@ public class WebConfig implements WebMvcConfigurer {
         // 为消息转换器设置对象转换器
         converter.setObjectMapper(new JacksonObjectDateMapper());
         // 将自己的消息转换器加入容器
-        converters.add(0, converter);
+        converters.add(1, converter);
+        // 解决加了上述消息转换器后出现报错的问题
+        StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
+        stringConverter.setSupportedMediaTypes(
+            List.of(MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN, MediaType.ALL));
+        // 一定要将优先级设成最高
+        converters.add(0, stringConverter);
     }
 }

@@ -1119,3 +1119,13 @@ Q.idea/sonarlint/securityhotspotstore/9/7/97375f6ffa45e61f322132b47ba8aafe6fb445
 Q.idea/sonarlint/securityhotspotstore/c/4/c450750172b68c5d2d60cf3d3b85e7ad1b3ee473,9\a\9a476b75aa496cdc9aafffe68f4d7bc853bb0a46
 Å
 Q.idea/sonarlint/securityhotspotstore/b/0/b0bb0a26d88d16d2e82502fe47e034e248a527a2,a\b\abff979ab89f5a1c300ea665b38e61345dcf9043
+Ö
+Ubook_test_master/src/main/java/cn/mila/book_test_master/dto/req/BorrowBookReqDto.java,6\2\62380a9822473ed72a7948f12ea38cc32f1f0acb
+H
+book_test_master/pom.xml,2\e\2e96c8c2da128a94804a897df26c67d4953ffd3f
+Ö
+Ubook_test_master/src/main/java/cn/mila/book_test_master/dto/req/ReturnBookReqDto.java,5\1\510d731122fd71965b2c4668ca485abdb89c9546
+Ü
+Vbook_test_master/src/main/java/cn/mila/book_test_master/BookTestMasterApplication.java,0\8\08a75234b9840a666833dd8e75e959d05949be25
+Ü
+Vbook_test_master/src/main/java/cn/mila/book_test_master/core/config/SwaggerConfig.java,5\d\5d945cbac814666b8f9922b11fcec5e858b427f9
