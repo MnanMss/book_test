@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**
- * 用户登录、组车，请求DTO
+ * 用户登录、注册，请求DTO
  *
  * @author mila
  * @date 2022/4/26
