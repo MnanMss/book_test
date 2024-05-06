@@ -1,5 +1,6 @@
 package cn.mila.book_test_master.core.util;
 
+import cn.mila.book_test_master.core.constant.SystemConfigConsts;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -48,6 +50,7 @@ public class JwtUtils {
             .setHeaderParam(HEADER_SYSTEM_KEY, systemKey)
             .setSubject(userId.toString())
             .signWith(Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8)))
+            .setExpiration(new Date(new Date().getTime() + SystemConfigConsts.JWT_EXPIRE_TIME))
             .compact();
     }
 

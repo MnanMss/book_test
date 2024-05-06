@@ -64,10 +64,16 @@ public class BookServiceImpl implements BookService {
         if (book.getBorrowStatus().equals(CommonConsts.BORROWED)) {
             throw new BusinessException(ErrorCodeEnum.BOOK_BORROW_ERROR);
         }
+        // 校验当前操作者   不能代替借书
+        if (!borrowBookDto.getBorrowerName().equals(UserHolder.getUserName())) {
+            throw new BusinessException(ErrorCodeEnum.BOOK_BORROW_ERROR);
+        }
         BeanUtils.copyProperties(borrowBookDto, book);
         book.setBorrowTime(LocalDateTime.now());
         book.setBorrowStatus(CommonConsts.BORROWED);
         LambdaUpdateWrapper<Book> wrapper = new LambdaUpdateWrapper<>();
+        // 重置归还时间
+        wrapper.set(Book::getReturnTime, null);
         wrapper.eq(Book::getId, borrowBookDto.getId());
         bookMapper.update(book, wrapper);
     }
@@ -84,12 +90,16 @@ public class BookServiceImpl implements BookService {
         if (book.getBorrowStatus().equals(CommonConsts.UN_BORROWED)) {
             throw new BusinessException(ErrorCodeEnum.BOOK_RETURN_ERROR);
         }
+        // 重置借阅者姓名
         book.setBorrowerName(null);
         book.setReturnTime(LocalDateTime.now());
         book.setBorrowStatus(CommonConsts.UN_BORROWED);
         LambdaUpdateWrapper<Book> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(Book::getId, returnBookDto.getId());
+        // 重置借阅者姓名
         wrapper.set(Book::getBorrowerName, null);
+        // 重置借书时间
+        wrapper.set(Book::getBorrowTime, null);
         bookMapper.update(book, wrapper);
     }
 }

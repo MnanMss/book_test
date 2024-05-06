@@ -16,6 +16,11 @@ public class SystemConfigConsts {
     public static final String HTTP_AUTH_HEADER_NAME = "Authorization";
 
     /**
+     * JWT 过期时间 两小时
+     */
+    public static final Long JWT_EXPIRE_TIME = Integer.toUnsignedLong(2 * 60 * 60 * 1000);
+
+    /**
      * 前台系统标识
      */
     public static final String BOOK_FRONT_KEY = "front";

@@ -45,8 +45,6 @@ Q
 !book_test_front/src/until/auth.js,b\b\bbf2a69e3d38385dda808e86bd8eb6c13f0ebb98
 ]
 -.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
-ä
-Zbook_test_master/src/main/java/cn/mila/book_test_master/core/json/JacksonObjectMapper.java,7\b\7bd792b5abc450242915a7cf00a62e7efd2a30aa
 é
 ^book_test_master/src/main/java/cn/mila/book_test_master/core/json/JacksonObjectDateMapper.java,a\f\af8ab1e1f3ee3ce0a5af6a9801541b1f932f5e81
 Å
@@ -1149,3 +1147,5 @@ Zbook_test_master/src/main/java/cn/mila/book_test_master/core/config/MybatisPlus
 Ybook_test_master/src/main/java/cn/mila/book_test_master/core/common/resp/PageRespDto.java,d\a\da1ee867ff384eab63e5816331bc88fe9a522219
 Å
 Qbook_test_master/src/main/java/cn/mila/book_test_master/core/auth/UserHolder.java,9\f\9fd7bbbb810e5e65008708411421e335dd45ff3d
+é
+^book_test_master/src/main/java/cn/mila/book_test_master/core/common/constant/CommonConsts.java,9\f\9fbd4f9eca491e5bc4d0dfce99ecf7064e7c5783
