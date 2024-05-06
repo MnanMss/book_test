@@ -2,7 +2,7 @@
 import {reactive, toRefs} from "vue";
 import {ElMessage} from "element-plus";
 import {login} from "@/api/user.js";
-import {setUid, setUserName} from "@/until/auth.js";
+import {setToken, setUid, setUserName} from "@/until/auth.js";
 import router from "@/router/index.js";
 
 export default {
@@ -22,6 +22,7 @@ export default {
         return;
       }
       const {data} = await login(state);
+      setToken(data.token)
       setUid(data.uid)
       setUserName(data.userName)
 

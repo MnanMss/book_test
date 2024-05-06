@@ -1,4 +1,4 @@
-package cn.mila.book_test_master.util;
+package cn.mila.book_test_master.core.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -43,7 +43,7 @@ public class JwtUtils {
      * @return JWT
      */
 
-    private String generateToken(Long userId, String systemKey) {
+    public String generateToken(Long userId, String systemKey) {
         return Jwts.builder()
             .setHeaderParam(HEADER_SYSTEM_KEY, systemKey)
             .setSubject(userId.toString())

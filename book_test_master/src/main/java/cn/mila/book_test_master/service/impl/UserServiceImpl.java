@@ -3,6 +3,8 @@ package cn.mila.book_test_master.service.impl;
 import cn.mila.book_test_master.core.common.constant.ErrorCodeEnum;
 import cn.mila.book_test_master.core.common.exception.BusinessException;
 import cn.mila.book_test_master.core.constant.DatabaseConsts;
+import cn.mila.book_test_master.core.constant.SystemConfigConsts;
+import cn.mila.book_test_master.core.util.JwtUtils;
 import cn.mila.book_test_master.dao.entity.User;
 import cn.mila.book_test_master.dao.mapper.UserMapper;
 import cn.mila.book_test_master.dto.req.UserReqDto;
@@ -28,6 +30,8 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
 
+    private final JwtUtils jwtUtils;
+
     /**
      * 用户注册
      *
@@ -37,6 +41,13 @@ public class UserServiceImpl implements UserService {
     public void register(UserReqDto userReqDto) {
         User user = new User();
         BeanUtils.copyProperties(userReqDto, user);
+        Map<String, Object> map = new HashMap<>();
+        map.put(DatabaseConsts.UserTable.COLUMN_USER_NAME, user.getUserName());
+        List<User> users = userMapper.selectByMap(map);
+        // 用户名已存在
+        if (users != null && !users.isEmpty()) {
+            throw new BusinessException(ErrorCodeEnum.USER_NAME_EXIST);
+        }
         String password = user.getPassword();
         // 进行md5加密
         password = DigestUtils.md5DigestAsHex(password.getBytes());
@@ -64,9 +75,11 @@ public class UserServiceImpl implements UserService {
             //密码错误
             throw new BusinessException(ErrorCodeEnum.PASSWORD_ERROR);
         }
+        // 登录成功生成jwt并返回
         return UserLoginRespDto.builder()
             .uid(users.get(0).getId())
             .userName(users.get(0).getUserName())
+            .token(jwtUtils.generateToken(users.get(0).getId(), SystemConfigConsts.BOOK_FRONT_KEY))
             .build();
     }
 }

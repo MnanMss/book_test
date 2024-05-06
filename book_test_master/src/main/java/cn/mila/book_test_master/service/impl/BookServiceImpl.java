@@ -79,10 +79,12 @@ public class BookServiceImpl implements BookService {
         if (!book.getBorrowerName().equals(returnBookDto.getBorrowerName())) {
             throw new BusinessException(ErrorCodeEnum.BOOK_RETURN_ERROR);
         }
+        book.setBorrowerName(null);
         book.setReturnTime(LocalDateTime.now());
         book.setBorrowStatus(CommonConsts.UN_BORROWED);
         LambdaUpdateWrapper<Book> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(Book::getId, returnBookDto.getId());
+        wrapper.set(Book::getBorrowerName, null);
         bookMapper.update(book, wrapper);
     }
 }

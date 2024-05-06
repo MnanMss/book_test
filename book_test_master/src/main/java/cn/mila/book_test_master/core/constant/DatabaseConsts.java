@@ -14,7 +14,7 @@ public class DatabaseConsts {
     public static class UserTable {
 
         private UserTable() {
-            throw new IllegalStateException("Constant class");
+            throw new IllegalStateException(SystemConfigConsts.CONST_INSTANCE_EXCEPTION_MSG);
         }
 
         public static final String COLUMN_USER_ID = "user_id";
@@ -27,7 +27,7 @@ public class DatabaseConsts {
     public static class BookTable {
 
         private BookTable() {
-            throw new IllegalStateException("Constant class");
+            throw new IllegalStateException(SystemConfigConsts.CONST_INSTANCE_EXCEPTION_MSG);
         }
 
         public static final String COLUMN_BOOK_ID = "book_id";

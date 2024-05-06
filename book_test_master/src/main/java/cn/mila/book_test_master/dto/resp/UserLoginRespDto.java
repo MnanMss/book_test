@@ -19,4 +19,7 @@ public class UserLoginRespDto {
 
     @Schema(description = "用户昵称")
     private String userName;
+
+    @Schema(description = "token")
+    private String token;
 }

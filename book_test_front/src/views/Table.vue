@@ -53,6 +53,7 @@ export default {
       const {data} = await borrowBook(borrowDto);
       row.borrowStatus = 1;
       row.borrowStatusName = "已借阅";
+      window.location.reload()
     };
 
     const returnBookMethod = async (index, row) => {
@@ -71,6 +72,7 @@ export default {
       const {data} = await returnBook(returnData);
       row.borrowStatus = 0;
       row.borrowStatusName = "待借阅";
+      window.location.reload()
     };
 
     const reset = () => {

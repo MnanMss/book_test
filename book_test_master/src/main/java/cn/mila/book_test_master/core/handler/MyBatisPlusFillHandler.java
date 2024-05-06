@@ -1,4 +1,4 @@
-package cn.mila.book_test_master.handler;
+package cn.mila.book_test_master.core.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;

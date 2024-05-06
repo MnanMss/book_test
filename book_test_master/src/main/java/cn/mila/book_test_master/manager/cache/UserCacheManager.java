@@ -5,6 +5,7 @@ import cn.mila.book_test_master.dao.entity.User;
 import cn.mila.book_test_master.dao.mapper.UserMapper;
 import cn.mila.book_test_master.dto.UserDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ import java.util.Objects;
  */
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class UserCacheManager {
 
     private final UserMapper userMapper;
@@ -25,6 +27,7 @@ public class UserCacheManager {
     @Cacheable(cacheManager = CacheConsts.CAFFEINE_CACHE_MANAGER,
         value = CacheConsts.USER_CACHE_NAME)
     public UserDto getUser(Long userId) {
+        log.info("缓存查找失败，获取用户 {}", userId);
         User user = userMapper.selectById(userId);
         if (Objects.isNull(user)) {
             return null;
