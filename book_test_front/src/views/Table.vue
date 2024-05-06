@@ -50,9 +50,7 @@ export default {
         id: row.id,
         borrowStatus: row.borrowStatus,
       }
-      const {data} = await borrowBook(borrowDto);
-      row.borrowStatus = 1;
-      row.borrowStatusName = "已借阅";
+      await borrowBook(borrowDto);
       window.location.reload()
     };
 
@@ -69,9 +67,7 @@ export default {
         id: row.id,
         borrowerName: row.borrowerName,
       }
-      const {data} = await returnBook(returnData);
-      row.borrowStatus = 0;
-      row.borrowStatusName = "待借阅";
+      await returnBook(returnData);
       window.location.reload()
     };
 

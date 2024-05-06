@@ -2,10 +2,16 @@ package cn.mila.book_test_master.core.config;
 
 import cn.mila.book_test_master.core.constant.ApiRouterConsts;
 import cn.mila.book_test_master.core.interceptor.AuthInterceptor;
+import cn.mila.book_test_master.core.json.JacksonObjectDateMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.List;
 
 /**
  * @author mila
@@ -13,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 @RequiredArgsConstructor
+@Slf4j
 public class WebConfig implements WebMvcConfigurer {
 
     private final AuthInterceptor authInterceptor;
@@ -26,5 +33,21 @@ public class WebConfig implements WebMvcConfigurer {
                 ApiRouterConsts.API_BOOK_URL_PREFIX + "/**")
             .excludePathPatterns(ApiRouterConsts.API_USER_URL_PREFIX + "/register",
                 ApiRouterConsts.API_USER_URL_PREFIX + "/login");
+    }
+
+    /**
+     * 扩展消息转换器 统一时间格式
+     *
+     * @param converters 消息转换器容器
+     */
+    @Override
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        log.info("扩展消息转换器...");
+        // 创建消息转换器对象
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        // 为消息转换器设置对象转换器
+        converter.setObjectMapper(new JacksonObjectDateMapper());
+        // 将自己的消息转换器加入容器
+        converters.add(0, converter);
     }
 }
