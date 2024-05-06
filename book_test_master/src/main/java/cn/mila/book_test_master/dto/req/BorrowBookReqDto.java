@@ -1,6 +1,7 @@
 package cn.mila.book_test_master.dto.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**
@@ -17,16 +18,13 @@ public class BorrowBookReqDto {
      * 借阅者名称
      */
     @Schema(description = "借阅者名称")
+    @NotBlank(message = "借阅者名称不能为空")
     private String borrowerName;
 
-    /**
-     * 借阅者ID
-     */
-    @Schema(description = "借阅者ID")
-    private Long borrowerId;
-
-    /**
-     * 借阅状态;0表示为借阅，1表示已借阅
-     */
-    private Integer borrowStatus;
+//    /**
+//     * 借阅者ID
+//     */
+//    @Schema(description = "借阅者ID")
+//    @NotBlank(message = "借阅者ID不能为空")
+//    private Long borrowerId;
 }

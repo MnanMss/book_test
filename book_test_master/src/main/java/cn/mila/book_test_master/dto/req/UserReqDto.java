@@ -2,6 +2,7 @@ package cn.mila.book_test_master.dto.req;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**
@@ -12,8 +13,11 @@ import lombok.Data;
  */
 @Data
 public class UserReqDto {
+
     @Schema(description = "用户名")
+    @NotBlank(message = "用户名不能为空")
     private String userName;
     @Schema(description = "密码")
+    @NotBlank(message = "密码不能为空")
     private String password;
 }

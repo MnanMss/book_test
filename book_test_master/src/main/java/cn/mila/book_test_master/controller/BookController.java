@@ -3,13 +3,16 @@ package cn.mila.book_test_master.controller;
 import cn.mila.book_test_master.core.common.resp.PageRespDto;
 import cn.mila.book_test_master.core.common.resp.RestResp;
 import cn.mila.book_test_master.core.constant.ApiRouterConsts;
+import cn.mila.book_test_master.core.constant.SystemConfigConsts;
 import cn.mila.book_test_master.dao.entity.Book;
 import cn.mila.book_test_master.dto.req.BorrowBookReqDto;
 import cn.mila.book_test_master.dto.req.ReturnBookReqDto;
 import cn.mila.book_test_master.dto.req.SearchReqDto;
 import cn.mila.book_test_master.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(ApiRouterConsts.API_BOOK_URL_PREFIX)
+@SecurityRequirement(name = SystemConfigConsts.HTTP_AUTH_HEADER_NAME)
 @Slf4j
 //@CrossOrigin("http://localhost:5173")
 @Tag(name = "BookController", description = "图书相关模块")
@@ -42,7 +46,7 @@ public class BookController {
      */
     @PostMapping("/page")
     @Operation(summary = "分页查询")
-    public RestResp<PageRespDto<Book>> page(@RequestBody SearchReqDto reqDto) {
+    public RestResp<PageRespDto<Book>> page(@Valid @RequestBody SearchReqDto reqDto) {
         log.info("分页查询，{}", reqDto);
         PageRespDto<Book> page = bookService.page(reqDto);
         return RestResp.ok(page);
@@ -56,7 +60,7 @@ public class BookController {
      */
     @PostMapping("/borrow")
     @Operation(summary = "借书")
-    public RestResp<Void> borrowBook(@RequestBody BorrowBookReqDto borrowBookDto) {
+    public RestResp<Void> borrowBook(@RequestBody @Valid BorrowBookReqDto borrowBookDto) {
         log.info("借书，{}", borrowBookDto);
         bookService.borrowBook(borrowBookDto);
         return RestResp.ok();
@@ -70,7 +74,7 @@ public class BookController {
      */
     @PostMapping("/returnBook")
     @Operation(summary = "还书")
-    public RestResp<Void> returnBook(@RequestBody ReturnBookReqDto returnBookDto) {
+    public RestResp<Void> returnBook(@RequestBody @Valid ReturnBookReqDto returnBookDto) {
         log.info("还书，{}", returnBookDto);
         bookService.returnBook(returnBookDto);
         return RestResp.ok();

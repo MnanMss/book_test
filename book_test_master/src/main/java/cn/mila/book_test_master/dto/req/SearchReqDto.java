@@ -1,6 +1,8 @@
 package cn.mila.book_test_master.dto.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 
 /**
@@ -21,11 +23,13 @@ public class SearchReqDto {
      * 请求页码，默认第 1 页
      */
     @Schema(description = "请求页码，默认第 1 页")
+    @Min(1)
     private int pageNum = 1;
 
     /**
      * 每页大小，默认每页 10 条
      */
     @Schema(description = "每页大小，默认每页 10 条")
+    @Max(20)
     private int pageSize = 10;
 }

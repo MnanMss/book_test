@@ -48,10 +48,11 @@ export default {
         borrowerName: getUserName(),
         borrowerId: getUId(),
         id: row.id,
-        borrowStatus: row.borrowStatus,
       }
       await borrowBook(borrowDto);
-      window.location.reload()
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     };
 
     const returnBookMethod = async (index, row) => {
@@ -68,7 +69,9 @@ export default {
         borrowerName: row.borrowerName,
       }
       await returnBook(returnData);
-      window.location.reload()
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     };
 
     const reset = () => {
@@ -129,7 +132,7 @@ export default {
     <el-pagination
         v-model:current-page="pageNum"
         v-model:page-size="pageSize"
-        :page-sizes="[5, 10, 20, 30]"
+        :page-sizes="[5, 10, 15,20]"
         :small="small"
         :disabled="disabled"
         :background="background"

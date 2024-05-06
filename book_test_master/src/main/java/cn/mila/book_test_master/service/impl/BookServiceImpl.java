@@ -60,12 +60,13 @@ public class BookServiceImpl implements BookService {
     @Override
     public void borrowBook(BorrowBookReqDto borrowBookDto) {
         // update book set borrow_time = ?, borrow_status = ? ,borrower_name = ? , borrower_id = ?
-        Book book = new Book();
-        BeanUtils.copyProperties(borrowBookDto, book);
-        book.setBorrowTime(LocalDateTime.now());
+        Book book = bookMapper.selectById(borrowBookDto.getId());
+        // 检查status
         if (book.getBorrowStatus().equals(CommonConsts.BORROWED)) {
             throw new BusinessException(ErrorCodeEnum.BOOK_BORROW_ERROR);
         }
+        BeanUtils.copyProperties(borrowBookDto, book);
+        book.setBorrowTime(LocalDateTime.now());
         book.setBorrowStatus(CommonConsts.BORROWED);
         LambdaUpdateWrapper<Book> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(Book::getId, borrowBookDto.getId());
