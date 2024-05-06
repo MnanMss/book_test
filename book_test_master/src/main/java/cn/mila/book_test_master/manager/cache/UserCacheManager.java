@@ -34,6 +34,7 @@ public class UserCacheManager {
         }
         return UserDto.builder()
             .userId(userId)
+            .userName(user.getUserName())
             .build();
     }
 

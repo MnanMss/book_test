@@ -22,6 +22,16 @@ public class UserHolder {
      */
     private static final ThreadLocal<Long> userIdTL = new ThreadLocal<>();
 
+    private static final ThreadLocal<String> userNameTL = new ThreadLocal<>();
+
+    public void setUserName(String userName) {
+        userNameTL.set(userName);
+    }
+
+    public String getUserName() {
+        return userNameTL.get();
+    }
+
     public void setUserId(Long userId) {
         userIdTL.set(userId);
     }
@@ -32,5 +42,6 @@ public class UserHolder {
 
     public void clear() {
         userIdTL.remove();
+        userNameTL.remove();
     }
 }

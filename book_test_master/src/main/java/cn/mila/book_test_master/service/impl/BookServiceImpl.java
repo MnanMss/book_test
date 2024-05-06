@@ -1,12 +1,12 @@
 package cn.mila.book_test_master.service.impl;
 
+import cn.mila.book_test_master.core.auth.UserHolder;
 import cn.mila.book_test_master.core.common.constant.CommonConsts;
 import cn.mila.book_test_master.core.common.constant.ErrorCodeEnum;
 import cn.mila.book_test_master.core.common.exception.BusinessException;
 import cn.mila.book_test_master.core.common.resp.PageRespDto;
 import cn.mila.book_test_master.dao.entity.Book;
 import cn.mila.book_test_master.dao.mapper.BookMapper;
-import cn.mila.book_test_master.dao.mapper.UserMapper;
 import cn.mila.book_test_master.dto.req.BorrowBookReqDto;
 import cn.mila.book_test_master.dto.req.ReturnBookReqDto;
 import cn.mila.book_test_master.dto.req.SearchReqDto;
@@ -30,7 +30,6 @@ import java.time.LocalDateTime;
 public class BookServiceImpl implements BookService {
 
     private final BookMapper bookMapper;
-    private final UserMapper userMapper;
 
     @Override
     public PageRespDto<Book> page(SearchReqDto reqDto) {
@@ -77,7 +76,12 @@ public class BookServiceImpl implements BookService {
     public void returnBook(ReturnBookReqDto returnBookDto) {
         Book book = bookMapper.selectById(returnBookDto.getId());
         // 防止别人还书
-        if (!book.getBorrowerName().equals(returnBookDto.getBorrowerName())) {
+        if (!returnBookDto.getBorrowerName().equals(UserHolder.getUserName()) ||
+            !returnBookDto.getBorrowerId().equals(UserHolder.getUserId())) {
+            throw new BusinessException(ErrorCodeEnum.BOOK_RETURN_ERROR);
+        }
+        // 检查status
+        if (book.getBorrowStatus().equals(CommonConsts.UN_BORROWED)) {
             throw new BusinessException(ErrorCodeEnum.BOOK_RETURN_ERROR);
         }
         book.setBorrowerName(null);

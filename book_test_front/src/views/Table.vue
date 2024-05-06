@@ -67,6 +67,7 @@ export default {
       const returnData = {
         id: row.id,
         borrowerName: row.borrowerName,
+        borrowerId: getUId()
       }
       await returnBook(returnData);
       setTimeout(() => {

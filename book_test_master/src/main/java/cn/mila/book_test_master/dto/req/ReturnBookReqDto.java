@@ -17,4 +17,7 @@ public class ReturnBookReqDto {
     @Schema(description = "借阅者名称")
     @NotBlank(message = "借阅者名称不能为空")
     private String borrowerName;
+
+    @Schema(description = "借阅者id")
+    private Long borrowerId;
 }

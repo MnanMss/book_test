@@ -1141,3 +1141,11 @@ Vbook_test_master/src/main/java/cn/mila/book_test_master/controller/UserControll
 Obook_test_master/src/main/java/cn/mila/book_test_master/dto/req/UserReqDto.java,3\1\31a2bcd075312c672e62406e3dcc00d7c4accd53
 Ä
 Pbook_test_master/src/main/java/cn/mila/book_test_master/service/BookService.java,d\b\db0520c5e6c41d6e5e15b63dd5b15bf067fe8d23
+x
+Hbook_test_master/src/main/java/cn/mila/book_test_master/dto/UserDto.java,6\6\660509de2f83b7dcec9a95b107c802e7fbee626e
+ä
+Zbook_test_master/src/main/java/cn/mila/book_test_master/core/config/MybatisPlusConfig.java,5\f\5f1d92ee2a51b1ec1d4664ce4c580b843acd8f5b
+â
+Ybook_test_master/src/main/java/cn/mila/book_test_master/core/common/resp/PageRespDto.java,d\a\da1ee867ff384eab63e5816331bc88fe9a522219
+Å
+Qbook_test_master/src/main/java/cn/mila/book_test_master/core/auth/UserHolder.java,9\f\9fd7bbbb810e5e65008708411421e335dd45ff3d

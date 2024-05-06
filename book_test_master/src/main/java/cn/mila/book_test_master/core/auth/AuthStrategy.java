@@ -54,6 +54,7 @@ public interface AuthStrategy {
         }
         // 设置当前线程 UserId
         UserHolder.setUserId(userId);
+        UserHolder.setUserName(user.getUserName());
         // 返回userId
         return userId;
     }
