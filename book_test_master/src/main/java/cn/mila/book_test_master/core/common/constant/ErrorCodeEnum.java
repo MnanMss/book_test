@@ -24,6 +24,11 @@ public enum ErrorCodeEnum {
      */
     USER_NAME_EXIST("A0111", "用户名已存在"),
 
+    /**
+     * 验证码错误
+     */
+    USER_VERIFY_CODE_ERROR("A0114", "验证码错误"),
+
     // 登录相关
     /**
      * 密码错误
@@ -55,6 +60,7 @@ public enum ErrorCodeEnum {
      * 系统异常
      */
     ERROR("B0001", "系统异常");
+
 
     /**
      * 错误码

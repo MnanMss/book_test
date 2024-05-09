@@ -2,11 +2,13 @@ package cn.mila.book_test_master.controller;
 
 import cn.mila.book_test_master.core.common.resp.RestResp;
 import cn.mila.book_test_master.core.constant.ApiRouterConsts;
-import cn.mila.book_test_master.dto.req.UserReqDto;
+import cn.mila.book_test_master.dto.req.UserLoginReqDto;
+import cn.mila.book_test_master.dto.req.UserRegisterReqDto;
 import cn.mila.book_test_master.dto.resp.UserLoginRespDto;
 import cn.mila.book_test_master.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,9 +37,9 @@ public class UserController {
      */
     @Operation(summary = "用户注册")
     @PostMapping("/register")
-    public RestResp<Void> register(@RequestBody UserReqDto userReqDto) {
-        log.info("用户注册：{}", userReqDto);
-        userService.register(userReqDto);
+    public RestResp<Void> register(@RequestBody @Valid UserRegisterReqDto userRegisterReqDto) {
+        log.info("用户注册：{}", userRegisterReqDto);
+        userService.register(userRegisterReqDto);
         return RestResp.ok();
     }
 
@@ -46,9 +48,9 @@ public class UserController {
      */
     @Operation(summary = "用户登录")
     @PostMapping("/login")
-    public RestResp<UserLoginRespDto> login(@RequestBody UserReqDto userReqDto) {
-        log.info("用户登录：{}", userReqDto);
-        UserLoginRespDto userRespDto = userService.login(userReqDto);
+    public RestResp<UserLoginRespDto> login(@RequestBody @Valid UserLoginReqDto userLoginReqDto) {
+        log.info("用户登录：{}", userLoginReqDto);
+        UserLoginRespDto userRespDto = userService.login(userLoginReqDto);
         return RestResp.ok(userRespDto);
     }
 }

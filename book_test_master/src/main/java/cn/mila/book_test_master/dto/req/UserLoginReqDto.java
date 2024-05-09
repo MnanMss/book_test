@@ -12,7 +12,7 @@ import lombok.Data;
  * @date 2022/4/26
  */
 @Data
-public class UserReqDto {
+public class UserLoginReqDto {
 
     @Schema(description = "用户名")
     @NotBlank(message = "用户名不能为空")

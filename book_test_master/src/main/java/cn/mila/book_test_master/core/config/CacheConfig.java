@@ -1,6 +1,7 @@
 package cn.mila.book_test_master.core.config;
 
 import cn.mila.book_test_master.core.constant.CacheConsts;
+import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.CacheManager;
@@ -41,4 +42,13 @@ public class CacheConfig {
         cacheManager.setCaches(caches);
         return cacheManager;
     }
+
+    @Bean
+    public Cache<String, String> imgVerifyCodeCache() {
+        return Caffeine.newBuilder()
+            .maximumSize(1000)
+            .expireAfterWrite(Duration.ofSeconds(60 * 5))
+            .build();
+    }
+
 }

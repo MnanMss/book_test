@@ -22,4 +22,5 @@ public class UserLoginRespDto {
 
     @Schema(description = "token")
     private String token;
+
 }

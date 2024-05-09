@@ -1,16 +1,19 @@
 <script>
-import {reactive, toRefs} from "vue";
+import {onMounted, reactive, toRefs} from "vue";
 import {register} from "@/api/user.js";
 import {ElMessage} from "element-plus";
 import {setUid, setUserName} from "@/until/auth.js";
 import router from "@/router/index.js";
+import {getImgVerifyCode} from "@/api/resource.js";
 
 export default {
   name: "register",
   setup() {
     const state = reactive({
       userName: "",
-      password: ""
+      password: "",
+      imgVerifyCode: "",
+      valCode: ""
     })
 
     const registerUser = async () => {
@@ -28,10 +31,19 @@ export default {
       setUserName(state.userName);
       router.push({path: "/login"});
     };
+    onMounted(async () => {
+      loadImgVerifyCode();
+    });
+    const loadImgVerifyCode = async () => {
+      const {data} = await getImgVerifyCode();
+      state.imgVerifyCode = "data:image/jpeg;base64," + data.img;
+      state.sessionId = data.sessionId;
+    };
 
     return {
       ...toRefs(state),
-      registerUser
+      registerUser,
+      loadImgVerifyCode
     }
   }
 }
@@ -66,6 +78,24 @@ export default {
           />
         </li>
         <li>
+          <label for="txtCaptcha" class="input-label">验证码</label>
+          <input
+              v-model="valCode"
+              name="txtCaptcha"
+              type="text"
+              id="txtCaptcha"
+              class="s_input"
+              placeholder="请输入验证码"
+          />
+          <img
+              style="cursor: pointer"
+              class="code_pic"
+              :src="imgVerifyCode"
+              id="chkd"
+              @click="loadImgVerifyCode"
+          />
+        </li>
+        <li>
           <input
               type="button"
               name="btnRegister"
@@ -83,6 +113,7 @@ export default {
     </div>
   </div>
 </template>
+
 
 <style scoped>
 .main {

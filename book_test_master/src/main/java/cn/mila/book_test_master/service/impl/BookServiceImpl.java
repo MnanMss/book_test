@@ -34,18 +34,26 @@ public class BookServiceImpl implements BookService {
     @Override
     public PageRespDto<Book> page(SearchReqDto reqDto) {
         // select * from where borrowerName = ? and bookName = ?
+        // 创建一个LambdaQueryWrapper对象，指定实体类为Book
         LambdaQueryWrapper<Book> queryWrapper = new LambdaQueryWrapper<Book>();
 
+        // 如果请求DTO的借阅者姓名不为空，则添加借阅者姓名等于请求DTO借阅者姓名的条件
         if (reqDto.getBorrowerName() != null && !reqDto.getBorrowerName().isEmpty()) {
             queryWrapper.eq(Book::getBorrowerName, reqDto.getBorrowerName());
         }
 
+        // 如果请求DTO的书名不为空，则添加书名类似于请求DTO书名的条件
         if (reqDto.getBookName() != null && !reqDto.getBookName().isEmpty()) {
             queryWrapper.like(Book::getBookName, reqDto.getBookName());
         }
 
+        // 创建一个分页对象，指定页码和每页记录数
         Page<Book> page = new Page<>(reqDto.getPageNum(), reqDto.getPageSize());
+
+        // 调用bookMapper的selectPage方法查询符合条件的记录，并返回分页对象
         Page<Book> resPage = bookMapper.selectPage(page, queryWrapper);
+
+        // 遍历分页对象中的记录，根据借阅状态设置借阅状态名称
         resPage.getRecords().forEach((t) -> {
             if (t.getBorrowStatus().equals(CommonConsts.BORROWED)) {
                 t.setBorrowStatusName(CommonConsts.BORROWED_NAME);
@@ -53,6 +61,7 @@ public class BookServiceImpl implements BookService {
                 t.setBorrowStatusName(CommonConsts.UN_BORROWED_NAME);
             }
         });
+
         return new PageRespDto<>(resPage.getPages(), resPage.getSize(), resPage.getTotal(), resPage.getRecords());
     }
 
